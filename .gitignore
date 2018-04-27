@@ -1,0 +1,6 @@
+# IntelliJ Core
+*.iml
+/.idea/
+
+# Node
+/node_modules/
