@@ -3,9 +3,12 @@ var webpack = require('webpack');
 const os = require('os');
 
 module.exports = {
-    entry: './index.js',
+    entry: {
+        "app": './index.js',
+        "test": './sample.js'
+    },
     output: {
-        filename: 'index.js',
+        filename: '[name].js',
         path: __dirname + '/assets'
     },
     mode: 'development',

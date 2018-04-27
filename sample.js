@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
 
+// React component
 class Counter extends Component {
     constructor(props) {
         super(props);
@@ -50,4 +54,47 @@ Counter.propTypes = {
     onDecrement: PropTypes.func.isRequired
 }
 
-export default Counter
+
+// Reducer
+function counter(state = { count: 0 }, action) {
+    const count = state.count;
+    switch (action.type) {
+        case 'INCREMENT':
+            return { count: count + 1 };
+        case 'DECREMENT':
+            return { count: count - 1 };
+        default:
+            return state
+    }
+}
+
+// Store
+const store = createStore(counter);
+
+// Map Redux state to component props
+function mapStateToProps(state) {
+    return {
+        value: state.count
+    }
+}
+
+// Map Redux actions to component props
+function mapDispatchToProps(dispatch) {
+    return {
+        onIncrement: () => dispatch({ type: 'INCREMENT' }),
+        onDecrement: () => dispatch({ type: 'DECREMENT' })
+    }
+}
+
+// Connected Component
+const App = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Counter)
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+)
