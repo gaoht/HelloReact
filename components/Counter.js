@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Row, Col, Card, Modal, Icon, DatePicker} from 'antd'
 
 class Counter extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Counter extends Component {
     render() {
         const { value, onIncrement, onDecrement } = this.props;
         return (
+            <Row>
             <p>
                 Clicked: {value} times
                 {' '}
@@ -40,6 +42,8 @@ class Counter extends Component {
                     Increment async
                 </button>
             </p>
+                <DatePicker />
+            </Row>
         )
     }
 }
